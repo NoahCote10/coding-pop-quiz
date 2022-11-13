@@ -17,3 +17,11 @@ main p {
     width: 300px;
     padding: 15px;
 }
+
+.answers:hover {
+    cursor: pointer;
+}
+
+#post-quiz {
+    display: none
+}

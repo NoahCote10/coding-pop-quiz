@@ -14,19 +14,48 @@
     <header>
         <!-- view high scores -->
         <h3 class="high-scores">View High Scores</h3>
-        <section class="count-down">Time: </section>
+        <section class="count-down">Time:<span class="time"></span> </section>
         <!-- timer -->
     </header>
     <main>
-        <h1>Coding Quiz Challenge</h1>
-        <p>
-            Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
-            answers will penalize your score by ten seconds!
-        </p>
-        <button>Start Quiz!</button>
+        <div id="prequiz-text">
+            <h1>Coding Quiz Challenge</h1>
+            <p>
+                Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
+                answers will penalize your score by ten seconds!
+            </p>
+            <button>Start Quiz!</button>
+        </div>
+        <div id="quiz-container">
+            <h4 id="questions-text"> </h4>
+            <ol id="answers-text">
+                <li id="a1" class="answers" data-answers=1></li>
+                <li id="a2" class="answers" data-answers=2></li>
+                <li id="a3" class="answers" data-answers=3></li>
+                <li id="a4" class="answers" data-answers=4></li>
+            </ol>
+            <div id="answers-feedback"></div>
+        </div>
+        <div id="post-quiz">
+            <h1>Quiz Completed!</h1>
+            <p>Great work! Enter your initials below to be added to the high score list.</p>
+            <div id="enter-score">
+                <input type="text" placeholder="Initials here">
+                <button>Submit</button>
+            </div>
+        </div>
+
     </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script src="script.js"></script>
 </body>
+<!-- 1. Remove Prequiz text -->
+<!-- 2. Add first question AND start timer -->
+<!-- 3. transitions from one question to the next -->
+<!-- 4. Indicate correct/incorrect answer -->
+<!-- 5. Subtract time from timer for incorrect answer -->
+<!-- 6. High score and initial input -->
 
 </html>
