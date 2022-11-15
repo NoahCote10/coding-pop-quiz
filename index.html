@@ -11,12 +11,10 @@
 </head>
 
 <body>
-    <header>
         <!-- view high scores -->
-        <h3 class="high-scores">View High Scores</h3>
+        <h3 id="view-high-scores">View High Scores</h3>
         <section class="count-down">Time:<span class="time"></span> </section>
         <!-- timer -->
-    </header>
     <main>
         <div id="prequiz-text">
             <h1>Coding Quiz Challenge</h1>
@@ -24,7 +22,7 @@
                 Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
                 answers will penalize your score by ten seconds!
             </p>
-            <button>Start Quiz!</button>
+            <button class='quiz-start'>Start Quiz!</button>
         </div>
         <div id="quiz-container">
             <h4 id="questions-text"> </h4>
@@ -40,10 +38,18 @@
             <h1>Quiz Completed!</h1>
             <p>Great work! Enter your initials below to be added to the high score list.</p>
             <div id="enter-score">
-                <input type="text" placeholder="Initials here">
-                <button>Submit</button>
+                <input type="text" placeholder="Initials here" class="name-input">
+                <button id="submit-name">Submit</button>
+                <p id="name-alert">You must enter a name!</p>
             </div>
         </div>
+        <div id="high-scores">
+            <h1>Scores</h1>
+            <button class="back-button">Back to Quiz</button>
+            <ul id="score-list"> 
+            </ul>
+        </div>
+        
 
     </main>
 
@@ -51,11 +57,8 @@
 
     <script src="script.js"></script>
 </body>
-<!-- 1. Remove Prequiz text -->
-<!-- 2. Add first question AND start timer -->
-<!-- 3. transitions from one question to the next -->
-<!-- 4. Indicate correct/incorrect answer -->
-<!-- 5. Subtract time from timer for incorrect answer -->
+
 <!-- 6. High score and initial input -->
+<!-- Local storage -->
 
 </html>

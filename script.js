@@ -5,7 +5,7 @@ const questionsText = document.querySelector("#questions-text");
 const answersText = document.querySelector("#answers-text");
 const answersFeedback = document.querySelector("#answers-feedback")
 const postquizText = document.querySelector("#post-quiz")
-const button = document.querySelector("button");
+const button = document.querySelector(".quiz-start");
 const timeEl = document.querySelector(".time");
 
 let userScores = JSON.parse(localStorage.getItem("scores"));
@@ -57,16 +57,23 @@ const quizQuestions = [
 // function that is run when start button is clicked
 function handleQuiz() {
     // hides pre-quiz text
+    secondsLeft = 90
     $(prequizText).hide();
+    $("#view-high-scores").hide();
+    $("#quiz-container").show();
     // starts timer
     const timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = secondsLeft;
-
         if (secondsLeft <= 0) {
+            secondsLeft = 0
             clearInterval(timerInterval);
-            // call score page and enter initials
+           $(quizContainer).hide();
+           $("#post-quiz").show();
+           timeEl.textContent = secondsLeft;
+           $(answersFeedback).text("")
         };
+        
     }, 1000);
     // displays first question, establishes function for each following question
     let i = 0
@@ -84,28 +91,68 @@ function handleQuiz() {
     $(".answers").on("click", function () {
         if (this.dataset.answers === quizQuestions[i].correctAnswer) {
             $(answersFeedback).text("Correct!")
-            console.log("your code worked yaaaay");
         } else {
             $(answersFeedback).text("Incorrect!")
             secondsLeft = secondsLeft - 15
             $(".time").text(secondsLeft);
-            console.log("incorrect, try again");
         }
         i++
         if (i > quizQuestions.length - 1) {
+            i = 0
             clearInterval(timerInterval)
-            console.log('quiz complete');
             $(quizContainer).hide();
             $(postquizText).show();
-
+            $(answersFeedback).text("")
         } else {
             changeQuestion();
         }
     })
 }
 
+// Creates an object that holds users initials and score, then pushes it to the userScores array
+function enterScore(userName) {
+    let newScore = {
+        "name": userName,
+        "score": secondsLeft
+    };
+    (userScores == null) ? userScores = [] : "";
+    userScores.push(newScore);
+    localStorage.setItem("scores", JSON.stringify(userScores));
+}
+
+function listScores() {
+    for (let i = 0; i < userScores.length; i++) {
+        $('#score-list').append('<li>' + userScores[i].name + ": " + userScores[i].score + "</li>");
+    };
+};
+// UNDER CONSTRUCTION
+function enterName() {
+    let nameInput = $(".name-input").val();
+    if (nameInput === "") {
+        $('#name-alert').show();
+    } else {
+        $('#post-quiz').hide();
+        $("#high-scores").show();
+        enterScore(nameInput);
+        listScores();
+    };
+};
+
+$('#view-high-scores').on('click', function () {
+    $(prequizText).hide();
+    $('#post-quiz').hide();
+    $("#high-scores").show();
+    listScores();
+});
+
+$(".back-button").on("click", function(){
+    $("#high-scores").hide();
+    $(prequizText).show();
+});
 
 button.addEventListener("click", function (event) {
     event.preventDefault();
     handleQuiz();
 })
+
+$("#submit-name").on("click", enterName);

@@ -1,13 +1,18 @@
 header {
-    margin: 15px;
+    margin-right: 15px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
 .count-down {
     padding-right: 30px;
+    margin-right:0
 }
 
+#view-high-scores:hover {
+    cursor: pointer;
+}
 main {
     text-align: center;
 }
@@ -24,4 +29,12 @@ main p {
 
 #post-quiz {
     display: none
+}
+
+#high-scores {
+    display: none;
+}
+
+#name-alert {
+    display: none;
 }
