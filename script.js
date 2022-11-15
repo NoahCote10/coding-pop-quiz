@@ -11,6 +11,7 @@ const timeEl = document.querySelector(".time");
 let userScores = JSON.parse(localStorage.getItem("scores"));
 let secondsLeft = 90
 
+// this is the quiz set
 const quizQuestions = [
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
@@ -54,14 +55,14 @@ const quizQuestions = [
     },
 ];
 
-// function that is run when start button is clicked
+// function that runs the quiz
 function handleQuiz() {
     // hides pre-quiz text
     secondsLeft = 90
     $(prequizText).hide();
     $("#view-high-scores").hide();
     $("#quiz-container").show();
-    // starts timer
+    // starts timer, and clears timer and answer feedback at end of quiz
     const timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = secondsLeft;
@@ -75,7 +76,7 @@ function handleQuiz() {
         };
         
     }, 1000);
-    // displays first question, establishes function for each following question
+    // used to change questions
     let i = 0
     function changeQuestion() {
         $(questionsText).text(quizQuestions[i].question);
@@ -125,7 +126,7 @@ function listScores() {
         $('#score-list').append('<li>' + userScores[i].name + ": " + userScores[i].score + "</li>");
     };
 };
-// UNDER CONSTRUCTION
+
 function enterName() {
     let nameInput = $(".name-input").val();
     if (nameInput === "") {
@@ -138,21 +139,23 @@ function enterName() {
     };
 };
 
+// click event for high scores
 $('#view-high-scores').on('click', function () {
     $(prequizText).hide();
     $('#post-quiz').hide();
     $("#high-scores").show();
     listScores();
 });
-
+// click event for back button
 $(".back-button").on("click", function(){
     $("#high-scores").hide();
+    $("#view-high-scores").show();
     $(prequizText).show();
 });
-
+// click event for starting the quiz
 button.addEventListener("click", function (event) {
     event.preventDefault();
     handleQuiz();
 })
-
+// click event for score submission
 $("#submit-name").on("click", enterName);
